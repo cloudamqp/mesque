@@ -10,3 +10,6 @@ All messages are persisted to disk by default, so in any kind of event messages 
 
 In Resque and Sidekiq (not Pro) the worker pulls message from Redis and only holds it in memory, so if the worker is killed for any reason and the message isn't processed you have lost the message for ever. In RabbitMQ on the otherhand messages has to be "acknowledged" before it's deleted from the queue. If a Mesque worker is killed the message will simply be requeued and another worker will pick it up. 
 
+### End to end encryption
+
+To protected your messages from eavesdropping all messages are by default encrypted with AES-256-CBC
