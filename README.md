@@ -13,3 +13,23 @@ In Resque and Sidekiq (not Pro) the worker pulls message from Redis and only hol
 ### End to end encryption
 
 To protected your messages from eavesdropping all messages can be encrypted with AES-128-GCM. GCM is more secure than CBC and much faster than HMAC-SHA1. 
+
+
+### Usage
+
+    # define a class with a class method named "perform"
+    class Archive
+      def self.perform(id, branch = 'master')
+        repo = Repository.find(repo_id)
+        repo.create_archive(branch)
+      end
+    end
+
+    # Create a Bunny connection
+    $bunny = Bunny.new ENV['CLOUDAMQP_URL'] || 'amqp://guest:guest@localhost'
+    $bunny.start
+
+    # Give a Bunny connection to Mesque
+    $mesque = Mesque.new $bunny
+    $mesque.enqueue Archive, 1, 'master'
+
