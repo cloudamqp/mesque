@@ -1,4 +1,5 @@
 require 'mesque/version'
+require 'json'
 
 class Mesque
   def initialize(bunny)
@@ -11,7 +12,7 @@ class Mesque
   end
 
   def <<(obj)
-    vars = obj.instance_variables.map { |k| [k, obj.instance_variable_get(k)] }
+    vars = obj.instance_variables.map { |k| [k, obj.instance_variable_get(k).sub(/^@/, '')] }
     pub(class: obj.class, vars: Hash[vars])
   end
 
