@@ -2,7 +2,7 @@
 
 A Resque compatible work library using RabbitMQ as backend for relability and performance.
 
-### RabbitMQ
+### Persistence and relability
 
 RabbitMQ is a efficent, purpose built message queue server. Where as Resque by default has a quite insecure and slow way of queueing and distributing work, RabbitMQ pushes out work messages to workers, in order. 
 
@@ -12,4 +12,4 @@ In Resque and Sidekiq (not Pro) the worker pulls message from Redis and only hol
 
 ### End to end encryption
 
-To protected your messages from eavesdropping all messages are by default encrypted with AES-256-CBC
+To protected your messages from eavesdropping all messages can be encrypted with AES-128-GCM. GCM is more secure than CBC and much faster than HMAC-SHA1. 
