@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+require 'mesque'
+
+mesque = Mesque.new
+mesque.work
+
